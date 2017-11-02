@@ -58,6 +58,32 @@ describe('parcoords initialization tests', function() {
             expect(gd._fullData[0].tickfont).toEqual(expected);
             expect(gd._fullData[0].rangefont).toEqual(expected);
         });
+
+        it('should use global font as label, tick and range font defaults', function() {
+            var gd = {
+                data: [{
+                    type: 'parcoords',
+                    domain: {
+                        x: [0, 1],
+                        y: [0, 1]
+                    }
+                }, {
+                    type: 'parcoords',
+                    domain: {
+                        x: [0.2, 0.8],
+                        y: [0.2, 0.8]
+                    }
+                }]
+            }
+
+            Plots.supplyDefaults(gd);
+
+            expect(gd._fullData[0].domain.x).toEqual([0, 1]);
+            expect(gd._fullData[0].domain.y).toEqual([0, 0.5]);
+            expect(gd._fullData[1].domain.x).toEqual([0, 1]);
+            expect(gd._fullData[1].domain.y).toEqual([0.5, 1]);
+        });
+
     });
 
     describe('parcoords defaults', function() {
